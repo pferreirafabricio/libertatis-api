@@ -4,7 +4,7 @@
 </h5>
 <p align="center">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
-  <img alt="CI Badge" src="https://github.com/pferreirafabricio/php-templateApi/actions/workflows/php.yml/badge.svg">
+  <img alt="CI Badge" src="https://github.com/pferreirafabricio/php-pirateCave/actions/workflows/php.yml/badge.svg">
 </p>
 
 ## :open_book: About 
