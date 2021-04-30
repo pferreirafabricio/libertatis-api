@@ -24,7 +24,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 # Get latest Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
-# Create system user to run Composer and Artisan Commands
+# Create system user to run Composer
 RUN useradd -G www-data,root -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user

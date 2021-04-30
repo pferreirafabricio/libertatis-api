@@ -38,14 +38,14 @@ services:
     environment:
       MYSQL_ROOT_USER: "root"
       MYSQL_ROOT_PASSWORD: "root"
-      MYSQL_DATABASE: "test"
+      MYSQL_DATABASE: "pirate_cave"
       # MYSQL_USER: "user"
       # MYSQL_PASSWORD: "user"
     ports: 
       - 3306:3306
-    volumes:
-      - /data/mysql:/var/lib/mysql
-      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    # volumes:
+      # - /data/mysql:/var/lib/mysql
+      # - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - phpapi
 
