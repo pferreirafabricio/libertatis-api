@@ -1,0 +1,25 @@
+grumphp:
+  # git_hook_variables:
+  #   EXEC_GRUMPHP_COMMAND: 'docker-compose exec app php ./vendor/bin/grumphp git:pre-commit'
+  tasks:
+    phpcs:
+      standard:
+        - "PSR12"
+
+    phpcpd:
+      directory: ['.']
+      exclude: ['vendor']
+      fuzzy: false
+      min_lines: 5
+      min_tokens: 70
+      triggered_by: ['php']
+
+    phpstan:
+      autoload_file: ~
+      configuration: ~
+      level: null
+      force_patterns: []
+      ignore_patterns: []
+      triggered_by: ['php']
+      memory_limit: "-1"
+      use_grumphp_paths: true
