@@ -57,7 +57,7 @@ class Model
         return isset($this->data->$name);
     }
 
-    public function __get(mixed $name): ?mixed
+    public function __get(mixed $name): mixed
     {
         return ($this->data->$name ?? null);
     }
@@ -136,7 +136,7 @@ class Model
      * @param integer $id
      * @param string $columns
      */
-    public function findById(int $id, string $columns = "*"): ?mixed
+    public function findById(int $id, string $columns = "*"): mixed
     {
         $find = $this->find('id = :id', "id={$id}", $columns);
         return $find->fetch();
@@ -148,7 +148,7 @@ class Model
      * @param boolean $all
      * @return mixed|null
      */
-    public function fetch(bool $all = false): ?mixed
+    public function fetch(bool $all = false): mixed
     {
         try {
             $stmt = Connect::getInstance()->prepare($this->mountQuery());
