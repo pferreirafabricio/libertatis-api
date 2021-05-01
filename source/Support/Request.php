@@ -10,11 +10,8 @@ class Request
 
     /**
      * Decode a given string
-     *
-     * @param  mixed $string
-     * @return string|array
      */
-    public static function decode(string $string)
+    public static function decode(string $string): array|string
     {
         if (self::isJson($string)) {
             return json_decode($string, true);
@@ -26,11 +23,8 @@ class Request
 
     /**
      * Verify if a string is a JSON or not
-     *
-     * @param  string $string
-     * @return bool
      */
-    public static function isJson(string $string): bool
+    private static function isJson(string $string): bool
     {
         json_decode($string);
         return (json_last_error() == JSON_ERROR_NONE);
