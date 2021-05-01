@@ -43,9 +43,9 @@ services:
       # MYSQL_PASSWORD: "user"
     ports: 
       - 3306:3306
-    # volumes:
-      # - /data/mysql:/var/lib/mysql
-      # - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    volumes:
+      - /data/mysql:/var/lib/mysql
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
     networks:
       - phpapi
 
