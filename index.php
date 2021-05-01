@@ -14,14 +14,12 @@ $dotenv->load();
  */
 $router = new Router(env('BASE_URL'), '@');
 
-$router->get('/hello', fn () => 'hello');
-
 /**
  * ROUTES
  */
-$router->namespace('Source\Controllers')->group('user');
+$router->namespace('Source\Controllers')->group('players');
 $router->get('/', 'PlayerController@index');
-$router->get('/{id}', 'PlayerController@getById');
+$router->get('/{nick}', 'PlayerController@show');
 $router->post('/', 'PlayerController@create');
 $router->put('/{id}', 'PlayerController@update');
 $router->delete('/{id}', 'PlayerController@delete');

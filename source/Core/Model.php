@@ -2,7 +2,7 @@
 
 namespace Source\Core;
 
-class Model
+abstract class Model
 {
     /** Table data */
     protected ?object $data;
