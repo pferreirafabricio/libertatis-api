@@ -18,13 +18,13 @@ class Model
 
     protected string $query;
 
-    protected string $conditionsParams;
+    protected array $conditionsParams = [];
 
-    protected string $order;
+    protected string $order = "";
 
-    protected string $limit;
+    protected string $limit = "";
 
-    protected string $offset;
+    protected string $offset = "";
 
     protected ?\PDOException $fail;
 
