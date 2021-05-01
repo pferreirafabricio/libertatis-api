@@ -27,28 +27,6 @@ class Player extends Model
     }
 
     /**
-     * Generic method for find record(s)
-     */
-    public function find(string $terms, string $params, string $columns = "*"): ?Player
-    {
-        $find = $this->read("SELECT {$columns} FROM " . self::$entity . " WHERE {$terms}", $params);
-
-        if ($this->fail() || !$find->rowCount()) {
-            return null;
-        }
-
-        return $find->fetchObject(__CLASS__);
-    }
-
-    /**
-     * Find a user by nick
-     */
-    public function findById(string $nick, string $columns = "*"): ?Player
-    {
-        return $this->find("nick = :nick", "nick={$nick}", $columns);
-    }
-
-    /**
      * Update a record by nick
      */
     public function updateById(array $data, string $nick): ?int
