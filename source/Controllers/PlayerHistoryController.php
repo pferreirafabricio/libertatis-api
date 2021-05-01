@@ -15,16 +15,17 @@ class PlayerHistoryController
         $this->playerHistory = new Player();
     }
 
-    public function index(): string
+    public function index(array $data): string
     {
         try {
+            $nick = (string) $data['nick'];
             $response = [];
 
-            foreach ($this->playerHistory->find()->fetch(true) as $playerHistory) {
-                $response[] = $playerHistory->data();
+            foreach ($this->playerHistory->getLastsPoints($nick) as $history) {
+                $response[] = $history->data();
             }
 
-            return response(['players' => $response])->json();
+            return response(['history' => $response])->json();
         } catch (\Exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
@@ -35,32 +36,22 @@ class PlayerHistoryController
         try {
             $request = Request::decode(file_get_contents('php://input'));
 
-            /** @var Player */
-            $playerHistory = $this->playerHistory
-                ->find('nick = :nick', "nick={$request['nick']}")
-                ->fetch();
+            /** @var PlayerHistory */
+            $playerHistory = $this->playerHistory->findByNickAndDate($request['nick']);
 
             if (!$playerHistory) {
-                return response([
-                    'error' => 'Esse jogador não existe'
-                ], 400)->json();
+                $playerHistory = $this->playerHistory->createIfNotExists($request);
             }
 
-            if (!$playerHistory->required($request)) {
-                return response([
-                    'error' => 'Verifique os dados e tente novamente'
-                ], 400)->json();
-            }
-
-            $playerHistory->update($request, 'nick = :nick', "nick={$playerHistory->nick}");
+            $playerHistory->updateScore($request['points']);
 
             if ($playerHistory->fail()) {
-                return response(['error' => 'Oops! Algo deu errado ao atualizar seu registro'], 400)->json();
+                return response(['error' => 'Oops! Algo deu errado ao atualizar seus pontos'], 400)->json();
             }
 
-            return response(['message' => 'Cadastro atualizado com sucesso' ])->json();
+            return response(['message' => 'Pontuação atualizada com sucesso'])->json();
         } catch (\Exception) {
-            return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
+            return response(['error' => 'Algo deu errado ao buscar a pontuação'], 500)->json();
         }
     }
 }

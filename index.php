@@ -17,10 +17,16 @@ $router = new Router(env('BASE_URL'), '@');
 /**
  * ROUTES
  */
-$router->namespace('Source\Controllers')->group('players');
+$router->namespace('Source\Controllers');
+
+$router->group('players');
 $router->get('/', 'PlayerController@index');
 $router->get('/{nick}', 'PlayerController@show');
 $router->post('/', 'PlayerController@create');
+$router->put('/', 'PlayerController@update');
+
+$router->group('players/history');
+$router->get('/{nick}', 'PlayerController@index');
 $router->put('/', 'PlayerController@update');
 
 $router->dispatch();
