@@ -25,20 +25,4 @@ class Player extends Model
         $this->name = $name;
         return $this;
     }
-
-    /**
-     * Update a record by nick
-     */
-    public function updateById(array $data, string $nick): ?int
-    {
-        return $this->update($data, "nick = :nick", "nick={$nick}");
-    }
-
-    /**
-     * Remove a record by nick
-     */
-    public function remove(string $nick): ?int
-    {
-        return $this->delete("nick = :nick", "nick={$nick}");
-    }
 }
