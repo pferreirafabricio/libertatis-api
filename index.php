@@ -21,7 +21,6 @@ $router->namespace('Source\Controllers')->group('players');
 $router->get('/', 'PlayerController@index');
 $router->get('/{nick}', 'PlayerController@show');
 $router->post('/', 'PlayerController@create');
-$router->put('/{id}', 'PlayerController@update');
-$router->delete('/{id}', 'PlayerController@delete');
+$router->put('/', 'PlayerController@update');
 
 $router->dispatch();

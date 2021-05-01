@@ -4,9 +4,6 @@ namespace Source\Core;
 
 abstract class Model
 {
-    /** Table data */
-    protected ?object $data;
-
     /** Table name */
     protected string $entity;
 
@@ -15,6 +12,9 @@ abstract class Model
 
     /** Required fields */
     protected array $required;
+
+    /** Table data */
+    protected ?object $data = null;
 
     protected string $query;
 
@@ -26,7 +26,7 @@ abstract class Model
 
     protected string $offset = "";
 
-    protected ?\PDOException $fail;
+    protected ?\PDOException $fail = null;
 
     /**
      * __construct
@@ -184,7 +184,7 @@ abstract class Model
      *
      * @param array $data @example ['name' => 'Noa', 'age' => 23]
      */
-    protected function create(array $data): ?int
+    public function create(array $data): ?int
     {
         try {
             $columns = implode(', ', array_keys($data));
@@ -207,7 +207,7 @@ abstract class Model
      * @param string $conditions @example "id = :id"
      * @param string $conditionsParams @example "id=1"
      */
-    protected function update(array $data, string $conditions, string $conditionsParams): ?int
+    public function update(array $data, string $conditions, string $conditionsParams): ?int
     {
         try {
             $dataSet = [];
@@ -224,39 +224,6 @@ abstract class Model
             $this->fail = $exception;
             return null;
         }
-    }
-
-    /**
-     * Update a record if have the $id property set
-     * or create the record if empty
-     */
-    public function save(): bool
-    {
-        if (!$this->required()) {
-            return false;
-        }
-
-        /** Update */
-        if (!empty($this->id)) {
-            $id = $this->id;
-            $this->update($this->safe(), "id = :id", "id={$id}");
-
-            if ($this->fail()) {
-                return false;
-            }
-        }
-
-        /** Create */
-        if (empty($this->id)) {
-            $id = $this->create($this->safe());
-
-            if ($this->fail()) {
-                return false;
-            }
-        }
-
-        $this->data = $this->findById($id)->data();
-        return true;
     }
 
     /**
