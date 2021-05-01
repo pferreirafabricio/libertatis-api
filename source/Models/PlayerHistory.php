@@ -2,7 +2,6 @@
 
 namespace Source\Models;
 
-use DateTime;
 use Source\Core\Model;
 
 class PlayerHistory extends Model
@@ -21,7 +20,7 @@ class PlayerHistory extends Model
     /**
      * Bootstrap the model instance
      */
-    public function bootstrap(string $nick, DateTime $date, int $score): PlayerHistory
+    public function bootstrap(string $nick, string $date, int $score): PlayerHistory
     {
         $this->nick = $nick;
         $this->date = $date;
@@ -53,10 +52,10 @@ class PlayerHistory extends Model
          ->fetch(true);
     }
 
-    public function updateScore(int $newScore): ?int
+    public function updateScore(int $newPoints): ?int
     {
         return $this->update(
-            ['points' => $newScore],
+            ['points' => $newPoints],
             'nick = :nick AND date = :date',
             "nick={$this->nick}&date={$this->currentDate}"
         );

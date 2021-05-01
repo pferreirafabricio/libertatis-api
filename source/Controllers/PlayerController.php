@@ -19,7 +19,7 @@ class PlayerController
         try {
             $response = [];
 
-            foreach ($this->player->find()->fetch(true) as $player) {
+            foreach ((array) $this->player->find()->fetch(true) as $player) {
                 $response[] = $player->data();
             }
 

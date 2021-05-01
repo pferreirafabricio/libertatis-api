@@ -2,7 +2,6 @@
 
 namespace Source\Controllers;
 
-use Source\Models\Player;
 use Source\Models\PlayerHistory;
 use Source\Support\Request;
 
@@ -12,7 +11,7 @@ class PlayerHistoryController
 
     public function __construct()
     {
-        $this->playerHistory = new Player();
+        $this->playerHistory = new PlayerHistory();
     }
 
     public function index(array $data): string
@@ -21,8 +20,8 @@ class PlayerHistoryController
             $nick = (string) $data['nick'];
             $response = [];
 
-            foreach ($this->playerHistory->getLastsPoints($nick) as $history) {
-                $response[] = $history->data();
+            foreach ((array) $this->playerHistory->getLastsPoints($nick) as $history) {
+                $response[] = $history?->data();
             }
 
             return response(['history' => $response])->json();

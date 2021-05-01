@@ -19,14 +19,14 @@ $router = new Router(env('BASE_URL'), '@');
  */
 $router->namespace('Source\Controllers');
 
-$router->group('players');
+$router->group('/players');
 $router->get('/', 'PlayerController@index');
 $router->get('/{nick}', 'PlayerController@show');
 $router->post('/', 'PlayerController@create');
 $router->put('/', 'PlayerController@update');
 
-$router->group('players/history');
-$router->get('/{nick}', 'PlayerController@index');
-$router->put('/', 'PlayerController@update');
+$router->group('/history');
+$router->get('/{nick}', 'PlayerHistoryController@index');
+$router->put('/', 'PlayerHistoryController@update');
 
 $router->dispatch();
