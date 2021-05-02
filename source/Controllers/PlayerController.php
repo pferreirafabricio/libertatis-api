@@ -50,6 +50,22 @@ class PlayerController
         try {
             $request = Request::decode(file_get_contents('php://input'));
 
+            if (!$this->validate($request)) {
+                return response([
+                    'error' => 'Dados inválidos'
+                ], 400)->json();
+            }
+
+            $exists = $this->player
+                ->find('nick = :nick', "nick={$request['nick']}", 'nick')
+                ->count();
+
+            if ($exists) {
+                return response([
+                    'error' => 'Já existe um usuário com esse nick'
+                ], 400)->json();
+            }
+
             $this->player->bootstrap($request['nick'], $request['name']);
 
             if (!$this->player->required($request)) {
@@ -74,6 +90,12 @@ class PlayerController
     {
         try {
             $request = Request::decode(file_get_contents('php://input'));
+
+            if (!$this->validate($request)) {
+                return response([
+                    'error' => 'Dados inválidos'
+                ], 400)->json();
+            }
 
             /** @var Player */
             $player = $this->player
@@ -102,5 +124,26 @@ class PlayerController
         } catch (\Exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
+    }
+
+    private function validate(array $data): bool
+    {
+        if (
+            !array_key_exists('nick', $data)
+            || !filter_var($data['nick'], FILTER_SANITIZE_SPECIAL_CHARS)
+            || strlen($data['nick']) > 60
+        ) {
+            return false;
+        }
+
+        if (
+            !array_key_exists('name', $data)
+            || !filter_var($data['name'], FILTER_SANITIZE_SPECIAL_CHARS)
+            || strlen($data['name']) > 120
+        ) {
+            return false;
+        }
+
+        return true;
     }
 }
