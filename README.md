@@ -1,6 +1,6 @@
 <h5 align="center">
   <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Webysther_20160423_-_Elephpant.svg/1280px-Webysther_20160423_-_Elephpant.svg.png" width="200" /><br>
-  <b>PHP API structure</b> 🐘
+  <b>Seeking freedom</b> ☠️
 </h5>
 <p align="center">
   <img alt="License" src="https://img.shields.io/badge/license-MIT-brightgreen">
@@ -8,17 +8,24 @@
 </p>
 
 ## :open_book: About 
-This project is a simple PHP API structure for use in quick and small projects without frameworks.
+This project is a a simple RESTful API for the Pirate Cave project.
 <br /><br />
 
 ## :bricks: This project was built with: 
 - [PHP](https://www.php.net/)
 - [CoffeCode Router](https://github.com/robsonvleite/router)
 - [MySQL](https://www.mysql.com/)
+- [Nginx](https://www.nginx.com/)
 - [Docker](https://www.docker.com/)
 
 ## :running_man: Installing and Running  
- `Coming soon...`
+ 1. Clone this repository `git clone https://github.com/pferreirafabricio/php-pirateCave.git`;
+ 2. Enter in the project's folder: `cd php-pirateCave`
+ 3. Build de app image: `docker-compose build app`
+ 4. Start the containers: `docker-compose up -d`
+ 6. Install project's dependencies: `docker-compose exec app composer install`
+ 7. Init GrumPHP pre-commit (optional): `docker-compose exec app php ./vendor/bin/grumphp git:pre-commit`
+ 8. Finally you can visit [`127.0.0.1:8000`](http://127.0.0.1:8000/) from your browser 😃
  
 ## :recycle: Contribute
  1. Fork this repository;
