@@ -7,10 +7,9 @@ use Source\Support\Request;
 
 class PlayerHistoryController
 {
-    private PlayerHistory $playerHistory;
-
-    public function __construct()
-    {
+    public function __construct(
+        private PlayerHistory $playerHistory
+    ) {
         $this->playerHistory = new PlayerHistory();
     }
 

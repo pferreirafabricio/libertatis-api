@@ -10,11 +10,6 @@ class Response
     /** @var int */
     private $httpResponseCode;
 
-    /**
-     * __construct
-     *
-     * @param mixed $data
-     */
     public function __construct($data, int $httpResponseCode = 200)
     {
         $this->data = $data;
@@ -24,8 +19,6 @@ class Response
 
     /**
      * Return the given data as JSON
-     *
-     * @return string
      */
     public function json(): string
     {
