@@ -36,7 +36,7 @@ class PlayerController
             $player = $this->player->find('nick = :nick', "nick={$nick}")->fetch();
 
             if (!$player) {
-                return response(['error' => "Jogador '{$nick}' não encontrado"], 400)->json();
+                return response(['error' => 'Jogador não encontrado'], 400)->json();
             }
 
             return response(['player' => $player->data()])->json();
