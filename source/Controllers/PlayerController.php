@@ -7,9 +7,10 @@ use Source\Support\Request;
 
 class PlayerController
 {
-    public function __construct(
-        private Player $player
-    ) {
+    private Player $player;
+
+    public function __construct()
+    {
         $this->player = new Player();
     }
 
