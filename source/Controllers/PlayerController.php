@@ -3,6 +3,7 @@
 namespace Source\Controllers;
 
 use Source\Models\Player;
+use Source\Models\PlayerHistory;
 use Source\Support\Request;
 
 class PlayerController
@@ -39,7 +40,12 @@ class PlayerController
                 return response(['error' => 'Jogador não encontrado'], 400)->json();
             }
 
-            return response(['player' => $player->data()])->json();
+            $playerHistory = new PlayerHistory();
+
+            return response([
+                'player' => $player->data(),
+                'todayPoints' => $playerHistory->findByNickAndDate($nick)->points
+            ])->json();
         } catch (\Exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }

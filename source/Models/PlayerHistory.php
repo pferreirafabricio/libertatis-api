@@ -45,11 +45,12 @@ class PlayerHistory extends Model
     public function getLastsPoints(string $nick, int $daysQuantity = 10): ?array
     {
         $date = date('Y-m-d', strtotime("-{$daysQuantity}days"));
+
         return $this->find(
             'nick = :nick AND date >= :date',
             "nick={$nick}&date={$date}"
         )
-         ->fetch(true);
+        ->fetch(true);
     }
 
     public function updateScore(int $newPoints): ?int
