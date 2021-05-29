@@ -120,7 +120,11 @@ class PlayerController
                 ], 400)->json();
             }
 
-            $player->update($request, 'nick = :nick', "nick={$player->nick}");
+            $player->update(
+                ['name' => $request['name']],
+                'nick = :nick',
+                "nick={$player->nick}"
+            );
 
             if ($player->fail()) {
                 return response(['error' => 'Oops! Algo deu errado ao atualizar seu registro'], 400)->json();
