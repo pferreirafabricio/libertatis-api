@@ -44,7 +44,7 @@ class PlayerController
 
             return response([
                 'player' => $player->data(),
-                'todayPoints' => $playerHistory->findByNickAndDate($nick)->points
+                'todayPoints' => $playerHistory->findByNickAndDate($nick)?->points ?? 0
             ])->json();
         } catch (\Exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
