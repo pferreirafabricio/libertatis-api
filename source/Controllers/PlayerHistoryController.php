@@ -21,11 +21,11 @@ class PlayerHistoryController
             $response = [];
 
             foreach ((array) $this->playerHistory->getLastsPoints($nick) as $history) {
-                $response[] = $history?->data();
+                $response[] = (!is_null($history) ? $history->data() : null);
             }
 
             return response(['history' => $response])->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
     }
@@ -49,7 +49,7 @@ class PlayerHistoryController
             }
 
             return response(['message' => 'Pontuação atualizada com sucesso'])->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar a pontuação'], 500)->json();
         }
     }

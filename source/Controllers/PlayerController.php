@@ -21,11 +21,11 @@ class PlayerController
             $response = [];
 
             foreach ((array) $this->player->find()->fetch(true) as $player) {
-                $response[] = $player->data();
+                $response[] = (!is_null($player) ? $player->data() : null);
             }
 
             return response(['players' => $response])->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
     }
@@ -41,12 +41,13 @@ class PlayerController
             }
 
             $playerHistory = new PlayerHistory();
+            $points = $playerHistory->findByNickAndDate($nick);
 
             return response([
                 'player' => $player->data(),
-                'todayPoints' => $playerHistory->findByNickAndDate($nick)?->points ?? 0
+                'todayPoints' => (!is_null($points) ? $points->points : 0)
             ])->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
     }
@@ -87,7 +88,7 @@ class PlayerController
             }
 
             return response(['message' => 'Cadastro realizado com sucesso' ], 201)->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
     }
@@ -131,7 +132,7 @@ class PlayerController
             }
 
             return response(['message' => 'Cadastro atualizado com sucesso' ])->json();
-        } catch (\Exception) {
+        } catch (\Exception $exception) {
             return response(['error' => 'Algo deu errado ao buscar o usuário'], 500)->json();
         }
     }
