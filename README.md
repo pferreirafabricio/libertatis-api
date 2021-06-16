@@ -11,6 +11,25 @@
 This project is a a simple RESTful API for the Pirate Cave project.
 <br /><br />
 
+## :rosette: API Routes
+$router->group('/players');
+$router->get('/', 'PlayerController@index');
+$router->get('/{nick}', 'PlayerController@show');
+$router->post('/', 'PlayerController@create');
+$router->put('/', 'PlayerController@update');
+
+$router->group('/history');
+$router->get('/{nick}', 'PlayerHistoryController@index');
+$router->put('/', 'PlayerHistoryController@update');
+
+$router->dispatch();
+```
+GET - players/supplies/{id}
+GET - api/supplies
+POST - api/restaurants
+POST - api/supplies
+```
+
 ## :bricks: This project was built with: 
 - [PHP](https://www.php.net/)
 - [CoffeCode Router](https://github.com/robsonvleite/router)
