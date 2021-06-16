@@ -16,10 +16,10 @@ This project is a a simple RESTful API for the Pirate Cave project.
 ```
 GET - players/
 GET - players/{nick}
-POST - players/{nick}
-PUT - players/{nick}
+POST - players/
+PUT - players/
 
-GET - history/
+GET - history/{nick}
 PUT - history/
 ```
 
