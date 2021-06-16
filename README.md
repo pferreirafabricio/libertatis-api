@@ -9,25 +9,18 @@
 
 ## :open_book: About 
 This project is a a simple RESTful API for the Pirate Cave project.
-<br /><br />
+
+> Check the Unity game [here](https://github.com/coetus-jd/unity-pirateCave)
 
 ## :rosette: API Routes
-$router->group('/players');
-$router->get('/', 'PlayerController@index');
-$router->get('/{nick}', 'PlayerController@show');
-$router->post('/', 'PlayerController@create');
-$router->put('/', 'PlayerController@update');
-
-$router->group('/history');
-$router->get('/{nick}', 'PlayerHistoryController@index');
-$router->put('/', 'PlayerHistoryController@update');
-
-$router->dispatch();
 ```
-GET - players/supplies/{id}
-GET - api/supplies
-POST - api/restaurants
-POST - api/supplies
+GET - players/
+GET - players/{nick}
+POST - players/{nick}
+PUT - players/{nick}
+
+GET - history/
+PUT - history/
 ```
 
 ## :bricks: This project was built with: 
