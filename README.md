@@ -33,7 +33,7 @@ PUT - history/
 ## :running_man: Installing and Running  
  1. Clone this repository `git clone https://github.com/pferreirafabricio/php-pirateCave.git`;
  2. Enter in the project's folder: `cd php-pirateCave`
- 3. Build de app image: `docker-compose build app`
+ 3. Build the app image: `docker-compose build app`
  4. Start the containers: `docker-compose up -d`
  6. Install project's dependencies: `docker-compose exec app composer install`
  7. Finally you can visit [`127.0.0.1:8000`](http://127.0.0.1:8000/) from your browser 😃
